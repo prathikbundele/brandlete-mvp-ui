@@ -1,0 +1,90 @@
+/* src/components/PersonalDetails.module.css */
+.container {
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .header h2{
+    margin : 0px;
+  }
+  
+  .editButton,
+  .saveButton {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .editButton {
+    background-color: #007bff;
+  }
+  
+  .saveButton {
+    background-color: #28a745;
+  }
+  
+  .details {
+    display: block;
+  }
+  
+  .profilePicture {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    position: relative;
+  }
+  
+  .image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+  
+  .fileInput {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .info {
+    flex: 1;
+  }
+  
+  .field {
+    margin-bottom: 15px;
+  }
+  
+  .field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .field p {
+    margin: 0;
+  }
+  
+  .field input,select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .field select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

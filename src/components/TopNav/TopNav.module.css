@@ -1,0 +1,38 @@
+/* src/components/Navbar.module.css */
+.navbar {
+    display: flex;
+    position: sticky;
+    top : 0px;
+    z-index: 10;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #282c34;
+  }
+  
+  .logo {
+    color: white;
+    font-size: 24px;
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navLink {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .navLink:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .active {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  

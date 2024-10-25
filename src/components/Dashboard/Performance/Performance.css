@@ -1,0 +1,28 @@
+.stats-container{
+    display: flex;
+    flex-direction: column;
+}
+.stats-section p{
+    margin : 8px 0px;
+}
+.scores-row{
+    display: flex;
+    gap : 20px;
+    background-color: gainsboro;
+    padding: 10px;
+}
+.point-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.point-label{
+    font-weight: 500;
+    font-size: 218x;;
+}
+.point-value{
+    font-weight: 700;
+    font-size: 24px;;
+}

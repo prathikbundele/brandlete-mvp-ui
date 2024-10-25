@@ -1,0 +1,76 @@
+.card{
+    display: block;
+    min-width: 300px;;
+    background-color: white;
+}
+
+.card .detailsWidget-userInfo{
+    background-color: #808080;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.dashboardWidget-avatarWrap{
+    padding: 20px;;
+    border-radius: 50%;
+    background-color: #2EC981;
+    color: white;
+    font-size: 24px;
+}
+.score-btn{
+    background-color: black;
+    padding: 10px;;
+    border-radius: 4px;;
+}
+.score-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-wrapper {
+    text-align: center;
+    color: #89e5ae; /* Light green color */
+    z-index: 10; /* Bring text above the half-circle */
+}
+
+.brand-text {
+    font-size: 18px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.score-text {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Styling for the left and right curved lines */
+.left-half-circle, .right-half-circle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 5px solid #1c6644; /* Greenish color from the image */
+    border-radius: 50%;
+}
+
+.left-half-circle {
+    border-right-color: transparent;
+    border-top-color: transparent;
+    transform: rotate(135deg);
+    left: -75px; /* Adjust to align with text */
+}
+
+.right-half-circle {
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotate(135deg);
+    right: -75px; /* Adjust to align with text */
+}
