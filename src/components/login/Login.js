@@ -21,7 +21,7 @@ function Login() {
   const onSubmit1 = async (data) => {
     try {
       // Make an API call to the login endpoint
-      const response = await axios.post("http://localhost:3000/api/login", data);
+      const response = await axios.post("https://brandlete-mvp-api.onrender.com/api/login", data);
 
       // If login is successful, display the success message
       setMessage("Login successful!");
@@ -42,7 +42,7 @@ function Login() {
     const onSubmit = async (data) => {
       try {
         // Make an API call to the login endpoint
-        const response = await axios.post("http://localhost:3000/api/login", data);
+        const response = await axios.post("https://brandlete-mvp-api.onrender.com/api/login", data);
   
         // If login is successful, display the success message
         setMessage("Login successful!");
