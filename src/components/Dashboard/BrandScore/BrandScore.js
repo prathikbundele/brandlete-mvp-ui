@@ -1,24 +1,33 @@
 import React, { useEffect, useContext, useState } from 'react';
+import api from '../../../utils/api';
 import { sportData, universityData } from '../../../dataConfig/DataConfig';
-import { UserContext } from '../../../context/UserContext'; // Import UserContext
+import { UserContext } from '../../../context/UserContext'; 
 
 import './BrandScore.css';
 
 function BrandScore() {
-  const { userDetails, updateUserDetails } = useContext(UserContext); // Access user details from context
+  const { userDetails, updateUserDetails } = useContext(UserContext); 
   const [atheleticScore, setAtheleticScore] = useState(0);
   const [academicScore, setAcademicScore] = useState(0);
   const [socialScore, setSocialScore] = useState(0);
   const [chartData, setChartData] = useState([]);
-  const [brandScore, setBrandScore] = useState(9)
+  const [brandScore, setBrandScore] = useState(0)
+  const [collegeList, setCollegeList] = useState([])
 
-  // Example data for 5 activity charts
+
+  useEffect( () => {
+    const response = api.get("/api/getUniversityList");
+    response.then(res => setCollegeList(res.data))
+    //setCollegeList(response.data)
+  },[])
 
   useEffect(() => {
     calcAtheleticScore();
-    calcAcademicScore();
     calcSocialScore();
   },[])
+  useEffect(() => {
+    calcAcademicScore();
+  },[collegeList])
 
   useEffect(()=> {
     const data = [
@@ -31,7 +40,6 @@ function BrandScore() {
   }, [atheleticScore, academicScore, socialScore])
 
   useEffect(() => {
-    console.log("brand score : ", {...userDetails, score : brandScore})
     updateUserDetails({...userDetails, score : brandScore})
   }, [brandScore])
 
@@ -40,11 +48,11 @@ function BrandScore() {
     const position = userDetails?.athleticDetails?.position;
     const totalScore = 340;
     var score = 0;
-    const metricsList = sportData.find(item => item.sportname == sport).metrics.filter(item => item.positions.includes(position))
-    metricsList.forEach(metric => {
+    const metricsList = sportData.find(item => item.sportname == sport)?.metrics?.filter(item => item.positions.includes(position))
+    metricsList?.forEach(metric => {
       const maxCat = totalScore * metric.weightPercent / 100;
       const topStat = metric.topStat;
-      const userStat = userDetails.athleticDetails?.metrics.find(item => item.name == metric.code).value;
+      const userStat = userDetails.athleticDetails?.metrics?.find(item => item.name == metric.code).value;
       const metricScore = userStat * maxCat / topStat ;
       score = score + metricScore
     })
@@ -52,11 +60,11 @@ function BrandScore() {
   }
 
   const calcAcademicScore = () => {
-    const maxRank = universityData.map(item => item.rank).sort((a,b) => a-b).pop();
+    const maxRank = collegeList.map(item => item.rank).sort((a,b) => a-b).pop();
     const minRank = 1;
-    const universityRank = universityData.find(item => item.name == userDetails.college)?.rank;
+    const universityRank = collegeList.find(item => item.school_name == userDetails.college)?.rank;
     const slope = 63 / (maxRank - minRank);
-    const scaledRank = 5 + slope * (maxRank - universityRank);
+    const scaledRank = 5 + slope * (maxRank - parseInt(universityRank));
     const academicScore = (userDetails?.academicDetails?.gpa < 2.3) ? 0 : (userDetails?.academicDetails?.gpa * 25.5) + scaledRank
     setAcademicScore(parseInt(academicScore))
   }

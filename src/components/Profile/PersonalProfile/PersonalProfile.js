@@ -97,11 +97,11 @@ const PersonalProfile = () => {
                 <input
                   type="text"
                   name="about"
-                  value={formDetails.firstName}
+                  value={formDetails.about}
                   onChange={handleInputChange}
                 />
               ) : (
-                <p>{formDetails.firstName}</p>
+                <p>{formDetails.about}</p>
               )}
             </div>
           <div className='field'>
@@ -178,7 +178,7 @@ const PersonalProfile = () => {
                         <option value={item.name}>{item.name}</option>
                       ))
                       }
-                    </select>
+                </select>
             ) : (
               <p>{formDetails.college}</p>
             )}

@@ -1,9 +1,13 @@
 // src/components/Login.js
 import React, { useEffect, useState } from "react";
+import CryptoJS from "crypto-js";
+import api from "../../utils/api";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Import axios
 import styles from "./Login.module.css"; // Import CSS module
+import profilePic from '../../assets/profile-pic.png'
+
 
 function Login() {
   // Initialize useForm from react-hook-form
@@ -13,47 +17,21 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  // State to store the login success or error message
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // Function to handle form submission
-  const onSubmit1 = async (data) => {
-    try {
-      // Make an API call to the login endpoint
-      const response = await axios.post("https://brandlete-mvp-api.onrender.com/api/login", data);
-
-      // If login is successful, display the success message
-      setMessage("Login successful!");
-
-      // Handle any further login actions (e.g., store token, redirect user, etc.)
-      console.log("Login successful", response.data);
-      navigate("/dashboard");
-    } catch (error) {
-      // Handle any errors and show an error message
-      if (error.response) {
-        setMessage("Login failed: " + error.response.data.message);
-      } else {
-        setMessage("Login failed: An error occurred.");
-      }
-    }
-  };
-    // Function to handle form submission
     const onSubmit = async (data) => {
       try {
-        // Make an API call to the login endpoint
-        const response = await axios.post("https://brandlete-mvp-api.onrender.com/api/login", data);
-  
-        // If login is successful, display the success message
+        const encodedPassword = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(data.password));
+        data.password = encodedPassword;
+        const response = await axios.post("https://brandlete-mvp-api.onrender.com/auth/login", data);
+        //const response = await axios.post("http://localhost:3000/auth/login", data)
         setMessage("Login successful!");
   
-        // Store login response (e.g., token or user data) in localStorage
         const { token, user } = response.data;  // Assuming response contains token and user data
         localStorage.setItem("token", token);   // Store token in localStorage
         localStorage.setItem("email", user.email); // Store user data in localStorage as string
   
-        // Handle any further login actions (e.g., store token, redirect user, etc.)
-        console.log("Login successful", response.data);
         navigate("/dashboard");  // Redirect to the dashboard after successful login
       } catch (error) {
         // Handle any errors and show an error message
@@ -67,7 +45,7 @@ function Login() {
 
   return (
     <div className={styles.container}>
-      <img src="/Images/logo.png" alt="Logo" className={styles.logo} />
+      <img src={profilePic} alt="Logo" className={styles.logo} />
       <h2>Login</h2>
 
       {/* Show the login success or error message */}

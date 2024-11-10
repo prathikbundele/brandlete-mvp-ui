@@ -1,11 +1,11 @@
 .card{
     display: block;
     min-width: 300px;;
-    background-color: white;
+    background-color: #13111a;
 }
 
 .card .detailsWidget-userInfo{
-    background-color: #808080;
+    background-color: #030318;
     color: white;
     padding: 10px;
     display: flex;

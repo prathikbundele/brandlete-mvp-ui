@@ -6,8 +6,6 @@ import profilePic from '../../../assets/profile-pic.png'
 function ProfileCard({user}) {
     const { userDetails } = useContext(UserContext); // Access user details from context
 
-    console.log("profile card : ", userDetails)
-
   return (
     <div className="card personal-details">
         <div className="detailsWidget-userInfo detailsWidget-userInfo--soccer -free">
@@ -18,24 +16,24 @@ function ProfileCard({user}) {
             <div className="dashboardWidget-avatarWrap">
                 <label href="/athlete_profile">
                         <span className="dashboardWidget-avatar default-avatar-initials default-avatar avatar-green">
-                            {user.firstName[0]}{user.lastName[0]}
+                            {/* {user?.firstName[0] || "N/A"}{user?.lastName[0]}  */}
                         </span>
                 </label>
             </div>
             <div>
                 <h4>
-                    {user.firstName} {user.lastName}
+                    {user.firstName || "N/A"} {user.lastName}
                 </h4>
                 <div className="player-colored divisor hidden-xs"></div>
                     <p className="personal-details-description">
-                        <p>Sport: {user.athleticDetails?.sport}<br />Grad Year: {userDetails.gradYear}</p>
+                        <p>Sport: {user.athleticDetails?.sport || "N/A"}<br />Grad Year: {userDetails.gradYear || "N/A"}</p>
                     </p>
             </div>
             <div>
                 <div class="score-container">
                     <div class="text-wrapper">
                         <p class="brand-text">Brand Score</p>
-                        <p class="score-text">{userDetails.score}</p>
+                        <p class="score-text">{userDetails.score || "N/A"}</p>
                     </div>
                 </div>
             </div>

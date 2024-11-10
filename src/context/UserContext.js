@@ -1,32 +1,26 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import api from "../utils/api";
 
 // Create UserContext
 export const UserContext = createContext();
 
 // Create UserProvider component
 export const UserProvider = ({ children }) => {
-  const [userDetails, setUserDetails] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    username: '',
-    sport: '',
-    institute: '',
-  });
+  const [userDetails, setUserDetails] = useState({});
   const token = localStorage.getItem('token');
-  const email = localStorage.getItem('email'); // Or however you store login info
+  const email = localStorage.getItem('email'); 
 
 
   // Fetch user details on mount
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const storedEmail = localStorage.getItem('email'); // Or however you store login info
-        if (storedEmail) {
-          const response = await axios.get(`http://localhost:3000/api/user?email=${storedEmail}`,{
+        const storedEmail = localStorage.getItem('email');
+        if (storedEmail && token) {
+          const response = await api.get(`/api/user?email=${storedEmail}`,{
             headers: {
-              Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
+              Authorization: `Bearer ${token}`, 
             },
           });
           setUserDetails(response.data);
@@ -40,12 +34,14 @@ export const UserProvider = ({ children }) => {
 
   // Function to update user details
   const updateUserDetails = async (updatedDetails) => {
+
+    console.log("update called")
     try {
       const token = localStorage.getItem('token');
-      const storedEmail = localStorage.getItem('email'); // Or however you store login info
-      const response = await axios.put('http://localhost:3000/api/user', {...updatedDetails, email : storedEmail}, {
+      const storedEmail = localStorage.getItem('email'); 
+      const response = await api.put('/api/user', {...updatedDetails, email : storedEmail}, {
         headers: {
-          Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
+          Authorization: `Bearer ${token}`, 
         },
       });
       setUserDetails((prevDetails) => ({

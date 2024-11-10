@@ -15,10 +15,10 @@ const Performance = () => {
                     <div className="stats-section">
                         <p>Atheletic Performance</p>
                         <div className="scores-row">
-                            {sportData.find(item => item.sportname == userDetails?.sport).metrics.filter(item => item.positions.includes(userDetails?.athleticDetails?.position)).map((metric, index) => (
+                            {sportData.find(item => item.sportname == userDetails.sport)?.metrics?.filter(item => item.positions.includes(userDetails?.athleticDetails?.position)).map((metric, index) => (
                                 <div className="point-section">
                                 <label className="point-label">{metric.initial}</label>
-                                <label className="point-value">{userDetails?.athleticDetails?.metrics.find(item => item.name == metric.code).value}</label>
+                                <label className="point-value">{userDetails?.athleticDetails?.metrics?.find(item => item.name == metric.code).value}</label>
                              </div>
                             ) )}
                         </div>

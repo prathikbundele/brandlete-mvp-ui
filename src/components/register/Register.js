@@ -1,8 +1,12 @@
-// src/components/Register.js
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../../utils/api";
+import CryptoJS from "crypto-js";
 import { useForm } from "react-hook-form";
-import axios from "axios"; // Import axios
-import styles from "./Register.module.css"; // Import CSS module
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; 
+import styles from "./Register.module.css"; 
+import profilePic from '../../assets/profile-pic.png'
+
 
 function Register() {
   const {
@@ -11,15 +15,28 @@ function Register() {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const [collegeList, setCollegeList] = useState([])
+
+
+  useEffect( () => {
+    const response = api.get("/api/getUniversityList");
+    response.then(res => setCollegeList(res.data))
+    //setCollegeList(response.data)
+  },[])
+
   const onSubmit = async (data) => {
     try {
-      // Make a POST request to the server to register the user
-      const response = await axios.post('http://localhost:3000/api/register', data);
+      const encodedPassword = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(data.password));
+      data.password = encodedPassword;
 
-      // Handle successful response
+      //const response = await axios.post('https://brandlete-mvp-api.onrender.com/auth/register', data);
+      const response = await api.post('/auth/register', data);
+
       console.log('User registered successfully', response.data);
+      navigate('/login')
     } catch (error) {
-      // Handle errors
       if (error.response) {
         console.log('Error:', error.response.data);
       } else if (error.request) {
@@ -33,7 +50,7 @@ function Register() {
   return (
     <div className={styles.container}>
       <div className={styles.form}>
-        <img src="/Images/logo.png" alt="Logo" className={styles.logo} />
+        <img src={profilePic} alt="Logo" className={styles.logo} />
         <h2>Register</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* first name Field */}
@@ -127,7 +144,7 @@ function Register() {
           </div>
 
           {/* Instagram Username Field */}
-          <div className={styles.field}>
+          {/* <div className={styles.field}>
             <label htmlFor="instagram">Instagram Username</label>
             <input
               id="instagram"
@@ -142,17 +159,23 @@ function Register() {
               })}
             />
             {errors.instagram && <p className={styles.error}>{errors.instagram.message}</p>}
-          </div>
+          </div> */}
 
           {/* College Name Field */}
           <div className={styles.field}>
             <label htmlFor="college">College Name</label>
-            <input
+            <select
               id="college"
-              type="text"
               className={styles.input}
               {...register("college", { required: "College name is required" })}
-            />
+            >
+              <option value="">Select College</option>
+              {collegeList.map((college, index) => (
+                <option key={index} value={college.school_name}>
+                  {college.school_name}
+                </option>
+              ))}
+            </select>
             {errors.college && <p className={styles.error}>{errors.college.message}</p>}
           </div>
 

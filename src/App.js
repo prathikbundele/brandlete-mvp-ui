@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import './App.css';
 
 function App() {
   return (
@@ -13,6 +14,12 @@ function App() {
       <Router>
         <TopNav />
         <div className="App">
+        {/* <div className="app-background">
+          <div className="bg-gradient-blur-wrapper">
+            <div className="bg-gradient-blur-circle bg-circle-1"></div>
+            <div className="bg-gradient-blur-circle bg-circle-2"></div>
+            <div className="bg-gradient-blur-circle bg-circle-3"></div>
+          </div> */}
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -58,6 +65,7 @@ function App() {
               />
             </Routes>
           </div>
+        {/* </div> */}
         </div>
       </Router>
     </UserProvider>

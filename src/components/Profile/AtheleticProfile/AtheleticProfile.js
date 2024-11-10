@@ -4,7 +4,7 @@ import {sportData} from '../../../dataConfig/DataConfig'
 import './AtheleticProfile.css'
 
 const AtheleticProfile = () => {
-  const { userDetails, updateUserDetails } = useContext(UserContext); // Access user details and updater
+  const { userDetails, updateUserDetails } = useContext(UserContext); 
   const [isEditing, setIsEditing] = useState(false);
   const [details, setDetails] = useState({
     sportName: 'Soccer',
@@ -12,24 +12,22 @@ const AtheleticProfile = () => {
   });
   const [formDetails, setFormDetails] = useState({
     athleticDetails : {
-      sport: userDetails?.athleticDetails?.sport || 'Soccer', // default to "Soccer"
+      sport: userDetails?.athleticDetails?.sport || 'Soccer',
       position: userDetails?.athleticDetails?.position || '',
-      metrics: userDetails?.athleticDetails?.metrics || [] // store user metrics in an object
+      metrics: userDetails?.athleticDetails?.metrics || [] 
     }
   });
   const [positions, setPositions] = useState([])
   const [metrics, setMetrics] = useState([])
 
-  // Update positions and metrics when the sport or position changes
   useEffect(() => {
 
     const sportInfo = sportData.find(s => s.sportname === formDetails.athleticDetails.sport);
     if (sportInfo) {
-      setPositions(sportInfo.positions); // Set available positions for the selected sport
-      setMetrics([]); // Clear metrics when sport changes
+      setPositions(sportInfo.positions); 
+      setMetrics([]); 
       if (formDetails.athleticDetails.position) {
-        // Filter and set metrics based on the selected position
-        const relevantMetrics = sportInfo.metrics.filter(metric =>
+        const relevantMetrics = sportInfo?.metrics?.filter(metric =>
           metric.positions.includes(formDetails.athleticDetails.position)
         );
         setMetrics(relevantMetrics);
@@ -38,7 +36,6 @@ const AtheleticProfile = () => {
   }, [formDetails.athleticDetails.sport, formDetails.athleticDetails.position]);
 
 
-  // Handle field change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormDetails({
@@ -69,19 +66,16 @@ const AtheleticProfile = () => {
     const { name, value } = e.target;
   
     setFormDetails((prevDetails) => {
-      // Check if the metric already exists
-      const existingMetrics = prevDetails.athleticDetails.metrics;
-      const metricIndex = existingMetrics.findIndex(metric => metric.name === name);
+      const existingMetrics = prevDetails.athleticDetails?.metrics;
+      const metricIndex = existingMetrics?.findIndex(metric => metric.name === name);
   
       let updatedMetrics;
   
       if (metricIndex !== -1) {
-        // If the metric exists, update its value
-        updatedMetrics = existingMetrics.map((metric, index) =>
+        updatedMetrics = existingMetrics?.map((metric, index) =>
           index === metricIndex ? { ...metric, value: value } : metric
         );
       } else {
-        // If the metric doesn't exist, add it
         updatedMetrics = [...existingMetrics, { name: name, value: value }];
       }
   
@@ -97,18 +91,16 @@ const AtheleticProfile = () => {
   
 
   const getMetricValue = (code) => {
-    return formDetails.athleticDetails.metrics.find(m => m.name == code)?.value || ''
+    return formDetails.athleticDetails?.metrics?.find(m => m.name == code)?.value || ''
   }
 
   const setMetricValue = () => {
      
   }
 
-  // Save and toggle edit mode
   const handleSave = () => {
     setIsEditing(false);
-    // Save logic here (e.g., API call)
-    updateUserDetails(formDetails); // Update context and database
+    updateUserDetails(formDetails); 
  
   };
 
@@ -171,10 +163,10 @@ const AtheleticProfile = () => {
           </div>
 
           {/* Dynamic Metrics based on Sport and Position */}
-          {metrics.length > 0 && (
+          {metrics?.length > 0 && (
             <div className='metrics'>
               <h3>Game Metrics</h3>
-              {metrics.map((metric, index) => (
+              {metrics?.map((metric, index) => (
                 <div className='field' key={metric.code}>
                   <label>{metric.value}:</label>
                   {isEditing ? (

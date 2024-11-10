@@ -5,7 +5,7 @@ import { universityData } from "../../../dataConfig/DataConfig";
 import './AcademicProfile.css'
 
 const AcademicProfile = () => {
-  const { userDetails, updateUserDetails } = useContext(UserContext); // Access user details and updater
+  const { userDetails, updateUserDetails } = useContext(UserContext); 
   const [isEditing, setIsEditing] = useState(false);
   const [details, setDetails] = useState({
     academicDetails : {
@@ -23,7 +23,6 @@ const AcademicProfile = () => {
     }
   });
 
-  // Handle field change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormDetails({
@@ -35,11 +34,9 @@ const AcademicProfile = () => {
     });
   };
 
-  // Save and toggle edit mode
   const handleSave = () => {
     setIsEditing(false);
-    // Save logic here (e.g., API call)
-    updateUserDetails(formDetails); // Update context and database
+    updateUserDetails(formDetails); 
   };
 
   return (

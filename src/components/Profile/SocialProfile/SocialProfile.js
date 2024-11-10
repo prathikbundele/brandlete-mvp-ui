@@ -1,4 +1,5 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import api from "../../../utils/api";
 import { UserContext } from '../../../context/UserContext';
 import instagramIcon from '../../../assets/instagram.png';
 import twitterIcon from '../../../assets/twitter.png';
@@ -15,8 +16,26 @@ const SocialProfile = () => {
         engagement : userDetails?.socialDetails?.engagement
       }
     });
+
+    const [profileData, setProfileData] = useState(null);
+
+    const connectInstagram = () => {
+      window.location.href = `http://localhost:3000/auth/social`;
+    };
+
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
   
-    // Handle field change
+      if (token) {
+        fetch(`http://localhost:3000/api/profile?token=${token}`)
+          .then((response) => response.json())
+          .then((data) => setProfileData(data))
+          .catch((error) => console.error("Error fetching data:", error));
+      }
+    }, []);
+  
+  
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setFormDetails({
@@ -28,11 +47,9 @@ const SocialProfile = () => {
       });
     };
   
-    // Save and toggle edit mode
     const handleSave = () => {
       setIsEditing(false);
-      // Save logic here (e.g., API call)
-      updateUserDetails(formDetails); // Update context and database
+      updateUserDetails(formDetails); 
     };
     return(
         <div className='container'>
@@ -52,7 +69,7 @@ const SocialProfile = () => {
         <div className='details'>
             <div style={{display : "flex"}}>
                 <p>
-                    <img src={instagramIcon} />
+                    <img src={instagramIcon} onClick={connectInstagram} />
                 </p>
                 <p>
                     <img src={tiktokIcon} />

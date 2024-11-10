@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
+import api from '../../../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext'; // Import UserContext
 import {sportsData} from '../../../dataConfig/DataConfig'
@@ -32,7 +33,7 @@ function Dashboard() {
       const email = localStorage.getItem('email')
 
       // Make the API call to fetch user details
-      const response = await axios.get(`http://localhost:3000/api/user?email=${email}`, {
+      const response = await api.get(`/api/user?email=${email}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
         },

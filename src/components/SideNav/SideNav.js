@@ -12,9 +12,9 @@ const SideNav = ({ onNavClick }) => {
                     <div onClick={() => onNavClick('academic')} className='navLink'>Academic</div>
                     <div onClick={() => onNavClick('atheletic')} className='navLink'>Atheletic</div>
                     <div onClick={() => onNavClick('social')} className='navLink'>Social</div>
-                    <div onClick={() => onNavClick('linkTree')} className='navLink'>Link Tree</div>
+                    {/* <div onClick={() => onNavClick('linkTree')} className='navLink'>Link Tree</div>
                     <div onClick={() => onNavClick('privacy')} className='navLink'>Privacy & Security</div>
-                    <div onClick={() => onNavClick('settings')} className='navLink'>Settings</div>
+                    <div onClick={() => onNavClick('settings')} className='navLink'>Settings</div> */}
             </div>
         </>
     )
