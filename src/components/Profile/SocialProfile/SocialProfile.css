@@ -1,0 +1,38 @@
+
+select {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    appearance: none; /* Remove default styling for consistency */
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+  }
+  option {
+    padding: 10px;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-left: 35px; /* Add space for the logo */
+  }
+  option[value="instagram"] {
+    background-image: url('../../../assets/instagram.png');
+  }
+  option[value="tiktok"] {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6e/TikTok_Logo.svg');
+  }
+  option[value="linkedin"] {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png');
+  }
+  option[value="twitter"] {
+    background-image: url('https://upload.wikimedia.org/wikipedia/en/6/60/Twitter_Logo_as_of_2021.svg');
+  }
+  select:disabled {
+    color: gray;
+    cursor: not-allowed;
+  }
+  option:disabled {
+    color: gray;
+    background-color: #f9f9f9;
+  }

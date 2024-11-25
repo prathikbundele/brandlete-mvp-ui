@@ -4,13 +4,12 @@ import CryptoJS from "crypto-js";
 import api from "../../utils/api";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
-import styles from "./Login.module.css"; // Import CSS module
+import axios from "axios";
+import styles from "./Login.module.css";
 import profilePic from '../../assets/profile-pic.png'
 
 
 function Login() {
-  // Initialize useForm from react-hook-form
   const {
     register,
     handleSubmit,
@@ -28,13 +27,12 @@ function Login() {
         //const response = await axios.post("http://localhost:3000/auth/login", data)
         setMessage("Login successful!");
   
-        const { token, user } = response.data;  // Assuming response contains token and user data
-        localStorage.setItem("token", token);   // Store token in localStorage
-        localStorage.setItem("email", user.email); // Store user data in localStorage as string
+        const { token, user } = response.data;  
+        localStorage.setItem("token", token);  
+        localStorage.setItem("email", user.email); 
   
-        navigate("/dashboard");  // Redirect to the dashboard after successful login
+        navigate("/dashboard");  
       } catch (error) {
-        // Handle any errors and show an error message
         if (error.response) {
           setMessage("Login failed: " + error.response.data.message);
         } else {
@@ -47,10 +45,8 @@ function Login() {
     <div className={styles.container}>
       <img src={profilePic} alt="Logo" className={styles.logo} />
       <h2>Login</h2>
-
       {/* Show the login success or error message */}
       {message && <p className={styles.message}>{message}</p>}
-
       {/* onSubmit will call handleSubmit provided by react-hook-form */}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         {/* Username Input */}

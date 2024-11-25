@@ -1,0 +1,120 @@
+.banner {
+  background: #09141A;
+  color: #f0f0f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 40px 40px 40px 40px #00CCFF1A;
+}
+
+.firstRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+}
+
+.dashboardWidget-avatarWrap{
+  padding: 20px;;
+  border-radius: 50%;
+  background-color: #2EC981;
+  color: white;
+  font-size: 24px;
+}
+
+.name-span {
+  font-family: Roboto;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.profilePic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSection {
+  font-size: 48px;
+  font-weight: bold;
+  color: #00FFB3;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for larger screens */
+  gap: 10px;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  margin: 12px;
+  font-size: 16px;
+  border-top: 1px solid #00668033;
+  border-bottom: 1px solid #00668033;
+}
+
+.label {
+  font-weight: bold;
+  color: #006680;
+}
+
+.value {
+  margin-left: 10px;
+  color: #FFFFFF;
+}
+
+/* Responsive styles for mobile view */
+@media (max-width: 768px) {
+  .firstRow {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .profilePic {
+      margin: 0 auto 10px; /* Center image and add space below */
+  }
+
+  .name-span {
+      font-size: 32px; /* Adjust font size for mobile */
+  }
+
+  .rightSection {
+      font-size: 36px; /* Adjust score size for mobile */
+  }
+
+  .detailsGrid {
+      grid-template-columns: 1fr; /* Single column for details */
+      gap: 15px;
+  }
+
+  .detailItem {
+      flex-direction: column; /* Stack labels and values vertically */
+      align-items: flex-start; /* Align content to the start */
+      text-align: left; /* Ensure text aligns properly */
+  }
+
+  .label, .value {
+      margin-left: 0;
+  }
+}

@@ -13,7 +13,7 @@ const Performance = () => {
                 <label className='section-header'>PERFORMANCE</label>
                 <div className="stats-container">
                     <div className="stats-section">
-                        <p>Atheletic Performance</p>
+                        <div className="section-header">Atheletic Performance</div>
                         <div className="scores-row">
                             {sportData.find(item => item.sportname == userDetails.sport)?.metrics?.filter(item => item.positions.includes(userDetails?.athleticDetails?.position)).map((metric, index) => (
                                 <div className="point-section">
@@ -24,7 +24,7 @@ const Performance = () => {
                         </div>
                     </div>
                     <div className="stats-section">
-                        <p>Academic Performance</p>
+                        <div className="section-header">Academic Performance</div>
                             <div className="scores-row">
                                 <div className="point-section">
                                    <label className="point-label">GPA</label>
@@ -33,7 +33,7 @@ const Performance = () => {
                             </div>
                     </div>
                     <div className="stats-section">
-                        <p>Social Performance</p>
+                        <div className="section-header">Social Performance</div>
                         <div className="scores-row">
                                 <div className="point-section">
                                    <label className="point-label">Total Followers</label>

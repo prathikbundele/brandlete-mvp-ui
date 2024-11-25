@@ -1,76 +1,103 @@
 :root {
-    --chart-size: 120px;
-    --track-color: #e0e0e0; /* Background color of the track */
-    --fill-color: #007bff;  /* Color of the filled portion */
-  }
-  
-  .brandScoreSection {
-    padding: 20px;
-    margin-bottom: 20px;;
-    color: black;
-    border-radius: 10px;
-    background-color: white;
-  }
-  
-  .brandScoreSection .section-header {
-    font-size: 18px;
-    margin-bottom: 8px;
-    font-weight: 700;
-  }
-  
+  --chart-size: 120px;
+  --track-color: #e0e0e0; /* Background color of the track */
+  --fill-color:  #00FFB3;  /* Color of the filled portion */
+}
+
+.brandScoreSection {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: #09141A;
+  color: #f0f0f0;
+}
+
+.brandScoreSection .section-header {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.chartGrid {
+  margin-top: 16px;
+  display: flex;
+  gap: 100px;
+  justify-content: space-evenly;
+  flex-wrap: wrap; /* Default for larger screens */
+}
+
+.chartContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Donut chart container */
+.donutChart {
+  --size: var(--chart-size);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: conic-gradient(var(--fill-color) calc(var(--percentage) * 1%), var(--track-color) 0);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Hollow center */
+.donutChart::before {
+  content: '';
+  position: relative;
+  width: 60%;
+  height: 60%;
+  background-color: #09141A; /* Center color */
+  border-radius: 50%;
+  z-index: 1; /* Make sure it appears above the conic-gradient */
+}
+
+/* Percentage text in the center */
+.chartText {
+  position: absolute;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  z-index: 2; /* Ensure the text appears above everything */
+}
+
+/* Chart label below the donut */
+.chartLabel {
+  font-size: 16px;
+  font-weight: bold;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+/* Responsive styles for mobile view */
+@media (max-width: 768px) {
   .chartGrid {
-    margin-top : 16px;
-    display: flex;
-    gap: 100px;
-    justify-content: space-evenly;
+      flex-wrap: nowrap; /* Prevent wrapping */
+      overflow-x: auto; /* Enable horizontal scrolling */
+      gap: 20px;
+      justify-content: flex-start; /* Align charts to the start */
+      padding: 10px;
+      scroll-snap-type: x mandatory; /* Enable snapping for the carousel */
   }
-  
+
   .chartContainer {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+      scroll-snap-align: center; /* Ensure each chart snaps to the center */
+      flex: 0 0 auto; /* Prevent shrinking */
+      width: 80%; /* Adjust width for better mobile view */
   }
-  
-  /* Donut chart container */
+
   .donutChart {
-    --size: var(--chart-size);
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    background: conic-gradient(var(--fill-color) calc(var(--percentage) * 1%), var(--track-color) 0);
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+      --size: 100px; /* Adjust chart size for mobile view */
   }
-  
-  /* Hollow center */
-  .donutChart::before {
-    content: '';
-    position: relative;
-    width: 60%;
-    height: 60%;
-    background-color: #fff; /* Center color (usually white) */
-    border-radius: 50%;
-    z-index: 1; /* Make sure it appears above the conic-gradient */
-  }
-  
-  /* Percentage text in the center */
-  .chartText {
-    position: absolute;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-    z-index: 2; /* Ensure the text appears above everything */
-  }
-  
-  /* Chart label below the donut */
+
   .chartLabel {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
+      font-size: 14px; /* Reduce label font size */
   }
-  
+}

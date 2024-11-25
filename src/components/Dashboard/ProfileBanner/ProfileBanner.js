@@ -1,65 +1,63 @@
-import React from 'react';
-import styles from './ProfileBanner.module.css';
+import React, {useContext} from 'react';
+import { UserContext } from '../../../context/UserContext'; 
 import profilePic from '../../../assets/profile-pic.png';
+import './ProfileBanner.css'
 
-function ProfileBanner() {
+function ProfileBanner({user}) {
+  const { userDetails } = useContext(UserContext); // Access user details from context
+
   return (
-    <div className={styles.banner}>
+    <div className="banner">
       {/* First row: Picture, Name, and Score */}
-      <div className={styles.firstRow}>
-        <div className={styles.leftSection}>
-          <img src={profilePic} alt="Profile" className={styles.profilePic} />
-          <div className={styles.details}>
-            <h3>John Doe</h3>
+      <div className="firstRow" >
+        <div className="leftSection" >
+          <div className='dashboardWidget-avatarWrap'>
+              {user.firstName && user.firstName[0] || "N/A"}{user.lastName && user.lastName[0]} 
+          </div>
+
+          <div className="name-span" >
+              {user.firstName || "N/A"} {user.lastName}
           </div>
         </div>
-        <div className={styles.rightSection}>
-          <span className={styles.score}>85</span>
+        <div className="rightSection" >
+          <span class="score-text">{userDetails.score || "N/A"}</span>
         </div>
       </div>
 
       {/* Second and third row: Labels and Values */}
-      <div className={styles.detailsGrid}>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Email:</span>
-          <span className={styles.value}>john.doe@example.com</span>
+      <div className="detailsGrid" >
+        <div className="detailItem" >
+            <span className="label" >brandlete Ranking</span>
+            <span className="value" >NA</span>
         </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Location:</span>
-          <span className={styles.value}>New York, USA</span>
+        <div className="detailItem" >
+          <span className="label" >hometown</span>
+          <span className="value" >{user.hometown}</span>
         </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Phone:</span>
-          <span className={styles.value}>+123456789</span>
+        <div className="detailItem" >
+          <span className="label" >location</span>
+          <span className="value" >{user.location}</span>
         </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Role:</span>
-          <span className={styles.value}>Developer</span>
-        </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Joined:</span>
-          <span className={styles.value}>Jan 2022</span>
+        <div className="detailItem" >
+          <span className="label" >School</span>
+          <span className="value" >{user.college}</span>
         </div>
 
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Followers:</span>
-          <span className={styles.value}>150</span>
+        <div className="detailItem" >
+          <span className="label" >Sport</span>
+          <span className="value" >{user.sport}</span>
         </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Following:</span>
-          <span className={styles.value}>200</span>
+        <div className="detailItem" >
+          <span className="label" >CLASS</span>
+          <span className="value" >{user.gradYear}</span>
         </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Posts:</span>
-          <span className={styles.value}>30</span>
+        <div className="detailItem" >
+          <span className="label" >Birthdate</span>
+          <span className="value" >{user.dob}</span>
         </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Likes:</span>
-          <span className={styles.value}>450</span>
-        </div>
-        <div className={styles.detailItem}>
-          <span className={styles.label}>Achievements:</span>
-          <span className={styles.value}>5</span>
+        <div className="detailItem" >
+          <span className="label" >HT / WT</span>
+          <span className="value" >{user.height}/{user.weight}</span>
         </div>
       </div>
     </div>

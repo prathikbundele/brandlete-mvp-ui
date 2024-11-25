@@ -1,10 +1,11 @@
 // api.js
 import axios from 'axios';
-import { isTokenExpired } from './auth'; // Helper function to check token expiration
+import { isTokenExpired } from './auth';
 
 // Create an Axios instance
 const api = axios.create({
   baseURL: "https://brandlete-mvp-api.onrender.com",
+  //baseURL: "http://localhost:3000",
 });
 
 // Token expiration and refresh handling
@@ -34,9 +35,7 @@ api.interceptors.request.use(
       if(!token){
         return
       }
-      // If the token is expired, redirect to login or refresh token
       if (isTokenExpired(token)) {
-        // Handle expired token: Redirect to login or request new token
         await handleTokenExpiration();
       } else {
         config.headers.Authorization = `Bearer ${token}`;
@@ -48,13 +47,10 @@ api.interceptors.request.use(
   );
   
   async function handleTokenExpiration() {
-    // Redirect to login or request a refresh token
     localStorage.removeItem('token');
     window.location.href = '/login';
   }
   
-
-// Function to refresh the token
 async function refreshToken() {
   try {
     const refreshToken = localStorage.getItem('refreshToken');
@@ -65,7 +61,6 @@ async function refreshToken() {
     localStorage.setItem('refreshToken', newRefreshToken);
     return token;
   } catch (error) {
-    // Redirect to login if refresh fails
     window.location.href = '/login';
     return null;
   }

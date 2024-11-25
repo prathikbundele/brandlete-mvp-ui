@@ -21,7 +21,10 @@ function Register() {
 
 
   useEffect( () => {
-    const response = api.get("/api/getUniversityList");
+    const controller = new AbortController();
+    const response = api.get("/api/getUniversityList",{
+      signal: controller.signal,
+    });
     response.then(res => setCollegeList(res.data))
     //setCollegeList(response.data)
   },[])

@@ -1,5 +1,9 @@
 .dashboard {
     padding: 8px;
+    background: #09141A;
+    color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
   }
 
   /* Popup styling */
@@ -53,7 +57,7 @@
   font-size: 16px; */
 }
 .row {
-  display: flex;
+  
 }
 .left-section{
   margin : 8px;

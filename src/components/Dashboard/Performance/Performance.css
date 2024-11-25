@@ -1,28 +1,100 @@
-.stats-container{
+/* General styles */
+.stats-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 16px; /* Add some space between sections */
 }
-.stats-section p{
-    margin : 8px 0px;
-}
-.scores-row{
-    display: flex;
-    gap : 20px;
-    background-color: gainsboro;
+
+.stats-section {
+    flex: 1 1 calc(33.33% - 16px); /* Set sections to occupy one-third of the container, minus the gap */
+    min-width: 125px; /* Ensure a minimum width */
+    margin: 8px 0px;
+    background: #09141A;
+    box-shadow: 0px 0px 48.12px 0px #00CCFF1A;
     padding: 10px;
+    border-radius: 8px; /* Add rounded corners for better appearance */
 }
-.point-section{
+
+.stats-section .section-header {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #006680;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.scores-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Allow items to wrap within the row */
+    padding: 10px;
+    gap: 10px; /* Add space between point sections */
+}
+
+.point-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    min-width: 50px; /* Ensure a minimum width for point sections */
 }
-.point-label{
+
+.point-label {
     font-weight: 500;
-    font-size: 218x;;
+    font-size: 12px;
+    margin-bottom: 4px; /* Add spacing between label and value */
 }
-.point-value{
+
+.point-value {
     font-weight: 700;
-    font-size: 24px;;
+    font-size: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .stats-container {
+        flex-direction: column; /* Stack sections vertically */
+        gap: 20px; /* Add space between stacked sections */
+    }
+
+    .stats-section {
+        flex: 1 1 100%; /* Make sections take full width */
+    }
+
+    .point-value {
+        font-size: 18px; /* Reduce font size for smaller screens */
+    }
+
+    .point-label {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scores-row {
+        flex-direction: column; /* Stack point sections vertically */
+    }
+
+    .point-section {
+        min-width: auto; /* Allow sections to shrink */
+    }
+
+    .section-header {
+        font-size: 12px; /* Adjust font size for very small screens */
+    }
+
+    .point-label {
+        font-size: 10px;
+    }
+
+    .point-value {
+        font-size: 16px;
+    }
 }

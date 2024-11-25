@@ -1,4 +1,5 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
+import api from "../../../utils/api";
 import { UserContext } from '../../../context/UserContext';
 import {universityData } from '../../../dataConfig/DataConfig'
 import './PersonalProfile.css';
@@ -20,6 +21,15 @@ const PersonalProfile = () => {
   });
 
   const [formDetails, setFormDetails] = useState(userDetails)
+  const [collegeList, setCollegeList] = useState([])
+
+
+  useEffect( () => {
+    const response = api.get("/api/getUniversityList");
+    response.then(res => setCollegeList(res.data))
+    //setCollegeList(response.data)
+  },[])
+
 
   // Handle field change
   const handleInputChange1 = (e) => {
@@ -174,10 +184,11 @@ const PersonalProfile = () => {
                     value={formDetails.college}
                     onChange={handleInputChange}
                     >
-                      {universityData.map((item, index) => (
-                        <option value={item.name}>{item.name}</option>
-                      ))
-                      }
+                      {collegeList.map((college, index) => (
+                      <option key={index} value={college.school_name}>
+                        {college.school_name}
+                      </option>
+                       ))}
                 </select>
             ) : (
               <p>{formDetails.college}</p>

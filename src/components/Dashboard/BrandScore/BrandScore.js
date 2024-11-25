@@ -15,18 +15,21 @@ function BrandScore() {
   const [collegeList, setCollegeList] = useState([])
 
 
-  useEffect( () => {
-    const response = api.get("/api/getUniversityList");
-    response.then(res => setCollegeList(res.data))
-    //setCollegeList(response.data)
-  },[])
+  // useEffect( () => {
+  //   const response = api.get("/api/getUniversityList");
+  //   response.then(res => setCollegeList(res.data))
+  //   //setCollegeList(response.data)
+  // },[])
 
   useEffect(() => {
     calcAtheleticScore();
     calcSocialScore();
-  },[])
+    const response = api.get("/api/getUniversityList");
+    response.then(res => setCollegeList(res.data))
+  },[userDetails])
+
   useEffect(() => {
-    calcAcademicScore();
+    collegeList.length > 0 && calcAcademicScore();
   },[collegeList])
 
   useEffect(()=> {
@@ -60,13 +63,15 @@ function BrandScore() {
   }
 
   const calcAcademicScore = () => {
-    const maxRank = collegeList.map(item => item.rank).sort((a,b) => a-b).pop();
-    const minRank = 1;
-    const universityRank = collegeList.find(item => item.school_name == userDetails.college)?.rank;
-    const slope = 63 / (maxRank - minRank);
-    const scaledRank = 5 + slope * (maxRank - parseInt(universityRank));
-    const academicScore = (userDetails?.academicDetails?.gpa < 2.3) ? 0 : (userDetails?.academicDetails?.gpa * 25.5) + scaledRank
-    setAcademicScore(parseInt(academicScore))
+    if(collegeList.length > 0){
+      const maxRank = collegeList.map(item => item.rank).sort((a,b) => a-b).pop();
+      const minRank = 1;
+      const universityRank = collegeList.find((item) => item.school_name.replace(' ', '') === userDetails?.college.replace(" ", ''))?.rank;
+      const slope = 63 / (maxRank - minRank);
+      const scaledRank = 5 + slope * (maxRank - parseInt(universityRank));
+      const academicScore = (userDetails?.academicDetails?.gpa < 2.3) ? 0 : (userDetails?.academicDetails?.gpa * 25.5) + scaledRank
+      setAcademicScore(parseInt(academicScore))
+    }
   }
 
   const calcSocialScore = () => {
@@ -84,18 +89,19 @@ function BrandScore() {
 
   return (
     <div className='brandScoreSection'>
-      <label className='section-header'>BRAND SCORE</label>
-      <div className='chartGrid'>
+    <label className='section-header'>BRAND SCORE</label>
+    <div className='chartGrid'>
         {chartData.map((item, index) => (
-          <div className='chartContainer' key={index}>
-            <div className='donutChart' style={{ '--percentage': item.percentage }}>
-              <span className='chartText'>{item.score}/{item.total}</span>
+            <div className='chartContainer' key={index}>
+                <div className='donutChart' style={{ '--percentage': item.percentage }}>
+                    <span className='chartText'>{item.score}/{item.total}</span>
+                </div>
+                <div className='chartLabel'>{item.label}</div>
             </div>
-            <div className='chartLabel'>{item.label}</div>
-          </div>
         ))}
-      </div>
     </div>
+</div>
+
   );
 }
 
