@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useContext} from "react";
-import { UserContext } from '../../../context/UserContext'; // Import UserContext
+import { UserContext } from '../../../context/UserContext';
 import { sportData } from "../../../dataConfig/DataConfig";
 
 import './Performance.css'
 
 const Performance = () => {
-    const { userDetails } = useContext(UserContext); // Access user details from context
+    const { userDetails } = useContext(UserContext);
 
     return(
         <>

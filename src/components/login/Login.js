@@ -9,7 +9,7 @@ import styles from "./Login.module.css";
 import profilePic from '../../assets/profile-pic.png'
 
 
-function Login() {
+function Login({onSwitch}) {
   const {
     register,
     handleSubmit,
@@ -43,7 +43,6 @@ function Login() {
 
   return (
     <div className={styles.container}>
-      <img src={profilePic} alt="Logo" className={styles.logo} />
       <h2>Login</h2>
       {/* Show the login success or error message */}
       {message && <p className={styles.message}>{message}</p>}
@@ -86,6 +85,9 @@ function Login() {
           Login
         </button>
       </form>
+      <p>
+      Don't have an account? <span onClick={onSwitch}>Register here</span>
+    </p>
     </div>
   );
 }

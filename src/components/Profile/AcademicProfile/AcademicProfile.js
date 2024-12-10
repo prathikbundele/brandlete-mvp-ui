@@ -7,14 +7,6 @@ import './AcademicProfile.css'
 const AcademicProfile = () => {
   const { userDetails, updateUserDetails } = useContext(UserContext); 
   const [isEditing, setIsEditing] = useState(false);
-  const [details, setDetails] = useState({
-    academicDetails : {
-      gpa: '',
-      testScore: '',
-      scoreType : ''
-    }
-  });
-
   const [formDetails, setFormDetails] = useState({
     academicDetails : {
       gpa:  userDetails?.academicDetails?.gpa || '',

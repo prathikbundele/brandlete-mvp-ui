@@ -66,7 +66,7 @@ function BrandScore() {
     if(collegeList.length > 0){
       const maxRank = collegeList.map(item => item.rank).sort((a,b) => a-b).pop();
       const minRank = 1;
-      const universityRank = collegeList.find((item) => item.school_name.replace(' ', '') === userDetails?.college.replace(" ", ''))?.rank;
+      const universityRank = collegeList.find((item) => item.school_name.replace(' ', '') === userDetails?.college?.replace(" ", ''))?.rank;
       const slope = 63 / (maxRank - minRank);
       const scaledRank = 5 + slope * (maxRank - parseInt(universityRank));
       const academicScore = (userDetails?.academicDetails?.gpa < 2.3) ? 0 : (userDetails?.academicDetails?.gpa * 25.5) + scaledRank

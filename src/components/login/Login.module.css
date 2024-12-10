@@ -1,11 +1,10 @@
 /* src/components/Login.module.css */
 .container {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
   margin: auto;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
   text-align: center;
 }
 

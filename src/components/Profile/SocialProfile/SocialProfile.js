@@ -1,10 +1,18 @@
 import React, {useState, useEffect, useContext} from "react";
+import Select from "react-select";
 import api from "../../../utils/api";
 import { UserContext } from '../../../context/UserContext';
 import instagramIcon from '../../../assets/instagram.png';
 import twitterIcon from '../../../assets/twitter.png';
 import tiktokIcon from '../../../assets/tiktok.png';
 import './SocialProfile.css'
+
+const options = [
+  { value: "instagram", label: <><img src={instagramIcon} alt="Instagram" style={{ width: "20px", marginRight: "10px" }} /> Instagram</> },
+  { value: "tiktok", label: <><img src={tiktokIcon} alt="TikTok" style={{ width: "20px", marginRight: "10px" }} /> TikTok</>, isDisabled: true },
+  //{ value: "linkedin", label: <><img src={linkedinIcon} alt="LinkedIn" style={{ width: "20px", marginRight: "10px" }} /> LinkedIn</>, isDisabled: true },
+  { value: "twitter", label: <><img src={twitterIcon} alt="Twitter" style={{ width: "20px", marginRight: "10px" }} /> Twitter</>, isDisabled: true },
+];
 
 const SocialProfile = () => {
   const [username, setUsername] = useState("");
@@ -27,15 +35,9 @@ const SocialProfile = () => {
         console.log("ig details : ", igProfileDetails)
         setIsPrivateProfile((prev) => {
           const isPrivate = igProfileDetails.is_private;
-
-          
-          // Execute callback logic directly here
-          // if (!isPrivate && igProfileDetails.follower_count >= 1500) {
-          //   fetchProfileAnalyticsAPI();
-          // }
           fetchProfileAnalyticsAPI(igProfileDetails.platform_username);
-    
-          return isPrivate; // Ensure state is updated
+
+          return isPrivate;
         });
       }
     },[igProfileDetails])
@@ -45,6 +47,12 @@ const SocialProfile = () => {
         alert("Account Private hai, Public karle")
       }
     },[isPrivateProfile])
+
+    useEffect(() => {
+      if(userDetails.socialDetails){
+        setUsername(userDetails.socialDetails.socialHandle)
+      }
+    }, [userDetails])
 
     const connectInstagram = async () => {
       await fetchBasicProfileAPI();
@@ -110,7 +118,7 @@ const SocialProfile = () => {
         <div className='container'>
         <div className='header'>
           <h2>Social Details</h2>
-          {isEditing ? (
+          {/* {isEditing ? (
             <button className='saveButton' onClick={handleSave}>
               Save
             </button>
@@ -118,7 +126,7 @@ const SocialProfile = () => {
             <button className='editButton' onClick={() => setIsEditing(true)}>
               Edit
             </button>
-          )}
+          )} */}
         </div>
   
         <div className='details'>
@@ -133,15 +141,9 @@ const SocialProfile = () => {
                     <img src={twitterIcon} />
                 </p>
             </div>
-            <div style={{display : "flex"}}>
-              <div>
-              <select id="socialDropdown" >
-                <option value="instagram" selected>Instagram</option>
-                <option value="tiktok" disabled>TikTok</option>
-                <option value="linkedin" disabled>LinkedIn</option>
-                <option value="twitter" disabled>Twitter</option>
-            </select>
-              </div>
+            <div style={{display : ""}}>
+              
+            <Select options={options} isOptionDisabled={(option) => option.isDisabled} />;
               <div className='field'>
                   <input
                     type="String"
@@ -154,26 +156,26 @@ const SocialProfile = () => {
                     Connect
               </button>
             </div>
-          { igProfileDetails && <div className='info'>
+          { (igProfileDetails || userDetails?.socialDetails) && <div className='info'>
             <div className='field'>
               <label>Followers:</label>
                 <input
                   disabled
                   type="number"
                   name="followers"
-                  value={igProfileDetails?.follower_count}
+                  value={userDetails?.socialDetails?.followers}
                 />
             </div>
           </div>
           }
-          { igProfileAnalyticsDetails && <>
+          { (igProfileAnalyticsDetails || userDetails?.socialDetails)  && <>
              <div className='field'>
              <label>Average Likes:</label>
                <input
                  disabled
                  type="number"
-                 name="average"
-                 value={igProfileAnalyticsDetails?.profile.average_likes}
+                 name="average_likes"
+                 value={userDetails?.socialDetails?.average_likes}
                />
               </div>
               <div className='field'>
@@ -182,7 +184,7 @@ const SocialProfile = () => {
                  disabled
                  type="number"
                  name="engagement"
-                 value={igProfileAnalyticsDetails?.profile.engagement_rate}
+                 value={userDetails?.socialDetails?.engagement}
                />
               </div>
               </>

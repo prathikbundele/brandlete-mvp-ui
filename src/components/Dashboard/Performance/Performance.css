@@ -3,18 +3,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    gap: 16px; /* Add some space between sections */
+    flex-wrap: wrap; 
+    gap: 16px;
 }
 
 .stats-section {
-    flex: 1 1 calc(33.33% - 16px); /* Set sections to occupy one-third of the container, minus the gap */
-    min-width: 125px; /* Ensure a minimum width */
+    flex: 1 1 calc(30.33% - 16px);
+    min-width: 125px;
     margin: 8px 0px;
     background: #09141A;
     box-shadow: 0px 0px 48.12px 0px #00CCFF1A;
     padding: 10px;
-    border-radius: 8px; /* Add rounded corners for better appearance */
+    border-radius: 8px;
 }
 
 .stats-section .section-header {
@@ -32,9 +32,9 @@
 .scores-row {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap; /* Allow items to wrap within the row */
+    flex-wrap: wrap;
     padding: 10px;
-    gap: 10px; /* Add space between point sections */
+    gap: 10px;
 }
 
 .point-section {
@@ -43,13 +43,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-width: 50px; /* Ensure a minimum width for point sections */
+    min-width: 50px;
 }
 
 .point-label {
     font-weight: 500;
     font-size: 12px;
-    margin-bottom: 4px; /* Add spacing between label and value */
+    margin-bottom: 4px;
 }
 
 .point-value {
@@ -60,16 +60,16 @@
 /* Responsive styles */
 @media (max-width: 768px) {
     .stats-container {
-        flex-direction: column; /* Stack sections vertically */
-        gap: 20px; /* Add space between stacked sections */
+        flex-direction: column; 
+        gap: 20px; 
     }
 
     .stats-section {
-        flex: 1 1 100%; /* Make sections take full width */
+        flex: 1 1 100%; 
     }
 
     .point-value {
-        font-size: 18px; /* Reduce font size for smaller screens */
+        font-size: 18px;
     }
 
     .point-label {
@@ -79,15 +79,15 @@
 
 @media (max-width: 480px) {
     .scores-row {
-        flex-direction: column; /* Stack point sections vertically */
+        flex-direction: column;
     }
 
     .point-section {
-        min-width: auto; /* Allow sections to shrink */
+        min-width: auto; 
     }
 
     .section-header {
-        font-size: 12px; /* Adjust font size for very small screens */
+        font-size: 12px; 
     }
 
     .point-label {

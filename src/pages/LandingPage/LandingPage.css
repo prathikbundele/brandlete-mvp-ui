@@ -1,0 +1,56 @@
+.landing-page {
+    height: 100vh;
+    background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    text-align: center;
+    overflow: auto;
+  }
+
+  .auth-component {
+    margin-top: 20px;
+  }
+  
+  .auth-component form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-component input {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .auth-component button {
+    padding: 10px;
+    background: #2575fc;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .auth-component button:hover {
+    background: #6a11cb;
+  }
+  
+  .auth-component span {
+    color: #2575fc;
+    cursor: pointer;
+  }
+
+  .auth-component span:hover {
+    text-decoration: underline;
+  }

@@ -81,7 +81,7 @@ function Dashboard() {
         </div>
       )} */}
       {userDetails  && (
-        <div class="row">
+        <div className="row">
         <div className='profile-banner'>
           <ProfileBanner user={userDetails} />
         </div>

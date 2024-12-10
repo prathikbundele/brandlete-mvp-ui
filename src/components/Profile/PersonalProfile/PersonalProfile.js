@@ -224,7 +224,7 @@ const PersonalProfile = () => {
           </div>
 
           <div className='field'>
-            <label>Height:</label>
+            <label>Height (In cm):</label>
             {isEditing ? (
               <input
                 type="text"
@@ -238,7 +238,7 @@ const PersonalProfile = () => {
           </div>
 
           <div className='field'>
-            <label>Weight:</label>
+            <label>Weight (In Pounds):</label>
             {isEditing ? (
               <input
                 type="text"

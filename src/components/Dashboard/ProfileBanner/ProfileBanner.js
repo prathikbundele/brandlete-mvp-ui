@@ -20,7 +20,7 @@ function ProfileBanner({user}) {
           </div>
         </div>
         <div className="rightSection" >
-          <span class="score-text">{userDetails.score || "N/A"}</span>
+          <span className="score-text">{userDetails.score || "N/A"}</span>
         </div>
       </div>
 

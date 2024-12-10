@@ -8,7 +8,7 @@ import styles from "./Register.module.css";
 import profilePic from '../../assets/profile-pic.png'
 
 
-function Register() {
+function Register({onSwitch}) {
   const {
     register,
     handleSubmit,
@@ -21,10 +21,8 @@ function Register() {
 
 
   useEffect( () => {
-    const controller = new AbortController();
-    const response = api.get("/api/getUniversityList",{
-      signal: controller.signal,
-    });
+    //const controller = new AbortController();
+    const response = axios.get("https://brandlete-mvp-api.onrender.com/api/getUniversityList");
     response.then(res => setCollegeList(res.data))
     //setCollegeList(response.data)
   },[])
@@ -35,7 +33,7 @@ function Register() {
       data.password = encodedPassword;
 
       //const response = await axios.post('https://brandlete-mvp-api.onrender.com/auth/register', data);
-      const response = await api.post('/auth/register', data);
+      const response = await axios.post('http://localhost:3000/auth/register', data);
 
       console.log('User registered successfully', response.data);
       navigate('/login')
@@ -52,44 +50,65 @@ function Register() {
 
   return (
     <div className={styles.container}>
+      <div>
+          Let’s Start Your Profile
+      </div>
       <div className={styles.form}>
-        <img src={profilePic} alt="Logo" className={styles.logo} />
-        <h2>Register</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* first name Field */}
+          
+          {/* Email Field */}
           <div className={styles.field}>
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="email">Email</label>
             <input
-              id="firstName"
-              type="text"
+              id="email"
+              type="email"
               className={styles.input}
-              {...register("firstName", {
-                required: "first name is required",
+              {...register("email", {
+                required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._]+$/,
-                  message: "Invalid username",
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Invalid email address",
                 },
               })}
             />
-            {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+            {errors.email && <p className={styles.error}>{errors.email.message}</p>}
           </div>
+          <div style={{display : 'flex'}}>
+            {/* first name Field */}
+            <div className={styles.field}>
+              <label htmlFor="firstName">First Name</label>
+              <input
+                id="firstName"
+                type="text"
+                className={styles.input}
+                {...register("firstName", {
+                  required: "first name is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._]+$/,
+                    message: "Invalid username",
+                  },
+                })}
+              />
+              {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+            </div>
 
-          {/* last name Field */}
-          <div className={styles.field}>
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              id="lastName"
-              type="text"
-              className={styles.input}
-              {...register("lastName", {
-                required: "Username is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._]+$/,
-                  message: "Invalid username",
-                },
-              })}
-            />
-            {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+            {/* last name Field */}
+            <div className={styles.field}>
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                id="lastName"
+                type="text"
+                className={styles.input}
+                {...register("lastName", {
+                  required: "Username is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._]+$/,
+                    message: "Invalid username",
+                  },
+                })}
+              />
+              {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+            </div>
           </div>
 
           {/* Username Field */}
@@ -110,24 +129,6 @@ function Register() {
             {errors.username && <p className={styles.error}>{errors.username.message}</p>}
           </div>
 
-          {/* Email Field */}
-          <div className={styles.field}>
-            <label htmlFor="email">Email ID</label>
-            <input
-              id="email"
-              type="email"
-              className={styles.input}
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Invalid email address",
-                },
-              })}
-            />
-            {errors.email && <p className={styles.error}>{errors.email.message}</p>}
-          </div>
-
           {/* Password Field */}
           <div className={styles.field}>
             <label htmlFor="password">Password</label>
@@ -146,27 +147,9 @@ function Register() {
             {errors.password && <p className={styles.error}>{errors.password.message}</p>}
           </div>
 
-          {/* Instagram Username Field */}
-          {/* <div className={styles.field}>
-            <label htmlFor="instagram">Instagram Username</label>
-            <input
-              id="instagram"
-              type="text"
-              className={styles.input}
-              {...register("instagram", {
-                required: "Instagram username is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._]+$/,
-                  message: "Invalid Instagram username",
-                },
-              })}
-            />
-            {errors.instagram && <p className={styles.error}>{errors.instagram.message}</p>}
-          </div> */}
-
           {/* College Name Field */}
           <div className={styles.field}>
-            <label htmlFor="college">College Name</label>
+            <label htmlFor="college">College</label>
             <select
               id="college"
               className={styles.input}
@@ -184,7 +167,7 @@ function Register() {
 
           {/* Sport Name Field */}
           <div className={styles.field}>
-            <label htmlFor="sport">Sport Name</label>
+            <label htmlFor="sport">Sport</label>
             <input
               id="sport"
               type="text"
@@ -197,6 +180,9 @@ function Register() {
           {/* Submit Button */}
           <button type="submit" className={styles.submitButton}>Register</button>
         </form>
+        <p>
+          Already have an account? <span onClick={onSwitch}><u>Login here</u></span>
+        </p>
       </div>
     </div>
   );
